@@ -1,8 +1,29 @@
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 export function Header() {
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Logout realizado",
+        description: "Você foi desconectado com sucesso",
+      });
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Erro ao fazer logout",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
       <div className="flex items-center gap-4 flex-1">
@@ -24,11 +45,14 @@ export function Header() {
         <div className="flex items-center gap-3">
           <div className="text-right">
             <p className="text-sm font-medium">Admin User</p>
-            <p className="text-xs text-muted-foreground">admin@company.com</p>
+            <p className="text-xs text-muted-foreground">{user?.email || 'admin@company.com'}</p>
           </div>
           <div className="w-8 h-8 bg-gradient-accent rounded-full flex items-center justify-center">
             <User className="w-4 h-4 text-white" />
           </div>
+          <Button variant="ghost" size="icon" onClick={handleSignOut} title="Sair">
+            <LogOut className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </header>
