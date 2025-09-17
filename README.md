@@ -1,73 +1,204 @@
-# Welcome to your Lovable project
+# WhatsApp RAG Chatbot - Dashboard Administrativo
 
-## Project info
+Uma aplicação completa para gerenciamento de chatbot RAG (Retrieval-Augmented Generation) integrado ao WhatsApp, com dashboard administrativo moderno e autenticação JWT.
 
-**URL**: https://lovable.dev/projects/a3dbfaa4-1c15-49bc-9007-11fa7ef6d983
+## 🚀 Funcionalidades
 
-## How can I edit this code?
+### ✅ Implementado
+- **Autenticação JWT** com Supabase
+- **Dashboard Administrativo** responsivo
+- **Interface moderna** com design system consistente
+- **Métricas em tempo real** (preparado para integração)
+- **Gestão de conversas** (interface pronta)
+- **Tema escuro/claro** automático
+- **Componentes reutilizáveis** com Shadcn/UI
 
-There are several ways of editing your application.
+### 🔄 Para Implementação Futura
+- Base de conhecimento RAG
+- Integração WhatsApp Business API
+- API OpenAI para geração de respostas
+- Banco de dados vetorial
+- Sistema de upload de documentos
 
-**Use Lovable**
+## 🛠️ Tecnologias
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a3dbfaa4-1c15-49bc-9007-11fa7ef6d983) and start prompting.
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **UI Components**: Shadcn/UI, Lucide Icons
+- **Autenticação**: Supabase Auth (JWT)
+- **Backend**: Supabase (PostgreSQL)
+- **Deploy**: Google Cloud Platform (App Engine)
+- **Build**: Vite
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📦 Instalação e Desenvolvimento
 
-**Use your preferred IDE**
+### Pré-requisitos
+```bash
+Node.js 18+ 
+npm ou yarn
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Configuração Local
+```bash
+# Clone o repositório
+git clone <seu-repositorio>
+cd whatsapp-rag-chatbot
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# Instale as dependências
+npm install
 
-Follow these steps:
+# Configure as variáveis de ambiente
+# (As configurações do Supabase já estão no projeto)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Execute em modo de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Scripts Disponíveis
+```bash
+npm run dev        # Desenvolvimento
+npm run build      # Build para produção
+npm run preview    # Preview da build
+npm run lint       # Verificação de código
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🌐 Deploy no Google Cloud Platform
 
-**Use GitHub Codespaces**
+### Configuração Inicial
+1. **Instale o Google Cloud SDK**:
+   ```bash
+   # macOS
+   brew install google-cloud-sdk
+   
+   # Ubuntu/Debian
+   curl https://sdk.cloud.google.com | bash
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+2. **Autentique-se**:
+   ```bash
+   gcloud auth login
+   gcloud auth application-default login
+   ```
 
-## What technologies are used for this project?
+3. **Configure o projeto**:
+   ```bash
+   gcloud config set project SEU_PROJECT_ID
+   gcloud app create --region=us-central1
+   ```
 
-This project is built with:
+### Deploy Automático
+```bash
+# Torne o script executável
+chmod +x deploy.sh
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Execute o deploy
+./deploy.sh
+```
 
-## How can I deploy this project?
+### Deploy Manual
+```bash
+# Build do projeto
+npm run build
 
-Simply open [Lovable](https://lovable.dev/projects/a3dbfaa4-1c15-49bc-9007-11fa7ef6d983) and click on Share -> Publish.
+# Deploy para App Engine
+gcloud app deploy
+```
 
-## Can I connect a custom domain to my Lovable project?
+### Deploy com Cloud Build (CI/CD)
+```bash
+# Ative o Cloud Build
+gcloud services enable cloudbuild.googleapis.com
 
-Yes, you can!
+# Execute o build
+gcloud builds submit --config=cloudbuild.yaml
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🏗️ Arquitetura
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```
+src/
+├── components/          # Componentes React
+│   ├── ui/             # Componentes base (Shadcn/UI)
+│   ├── Dashboard.tsx   # Dashboard principal
+│   ├── Header.tsx      # Cabeçalho com logout
+│   └── Sidebar.tsx     # Menu lateral
+├── pages/              # Páginas principais
+│   ├── Auth.tsx        # Login/Cadastro
+│   ├── Index.tsx       # Página inicial
+│   └── NotFound.tsx    # 404
+├── contexts/           # Contextos React
+│   └── AuthContext.tsx # Gerenciamento de autenticação
+├── integrations/       # Integrações externas
+│   └── supabase/       # Cliente Supabase
+├── hooks/              # Hooks customizados
+└── lib/                # Utilitários
+```
+
+## 🎨 Design System
+
+O projeto utiliza um design system consistente baseado em:
+
+- **Cores**: HSL com suporte a tema escuro/claro
+- **Tipografia**: Inter (via Tailwind)
+- **Componentes**: Shadcn/UI customizados
+- **Icons**: Lucide React
+- **Animações**: Tailwind CSS + Framer Motion ready
+
+### Paleta de Cores Principal
+- **Primary**: Verde (`142 76% 36%`) - Cor principal do bot
+- **Background**: Escuro (`240 10% 3.9%`) - Fundo principal
+- **Card**: Semi-transparente com blur
+- **Accent**: Gradientes suaves
+
+## 🔐 Autenticação
+
+Sistema completo com Supabase:
+
+- **JWT Tokens** automáticos
+- **Sessão persistente** no localStorage
+- **Proteção de rotas** com ProtectedRoute
+- **Estados de loading** gerenciados
+- **Tratamento de erros** em português
+
+## 📊 Métricas e Monitoramento
+
+Dashboard preparado para:
+
+- **Conversas ativas** em tempo real
+- **Taxa de resposta** do bot
+- **Satisfação do usuário** (NPS ready)
+- **Performance** de busca RAG
+- **Logs de erro** centralizados
+
+## 🚦 Próximos Passos
+
+1. **Implementar RAG**:
+   - Banco de dados vetorial (Pinecone/ChromaDB)
+   - Embeddings com OpenAI API
+   - Sistema de busca semântica
+
+2. **WhatsApp Integration**:
+   - WhatsApp Business API
+   - Webhooks para mensagens
+   - Gestão de templates
+
+3. **Funcionalidades Avançadas**:
+   - Upload de documentos
+   - Treinamento do modelo
+   - Analytics avançado
+
+## 🆘 Suporte
+
+Para dúvidas ou problemas:
+
+1. Verifique os logs no Google Cloud Console
+2. Execute `npm run dev` localmente para debug
+3. Consulte a documentação do Supabase
+4. Teste a autenticação primeiro
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+---
+
+**Desenvolvido com ❤️ para automatizar atendimento no WhatsApp**

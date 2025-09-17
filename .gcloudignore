@@ -1,0 +1,60 @@
+# This file specifies files that are _not_ uploaded to Google Cloud
+# when you run gcloud app deploy
+
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# TypeScript compilation cache
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Development files
+src/
+*.ts
+*.tsx
+tsconfig*.json
+vite.config.ts
+tailwind.config.ts
+postcss.config.js
+
+# Build tools
+.eslintrc.js
+.prettierrc
+.gitignore
+
+# Version control
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MacOS files
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Testing
+coverage/
+.nyc_output
+
+# Temporary files
+tmp/
+temp/
+
+# Documentation (optional, remove if you want docs in production)
+README.md
+docs/
